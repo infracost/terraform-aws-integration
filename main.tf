@@ -63,6 +63,10 @@ locals {
     "sqs:ListQueueTags",
     "tag:GetResources",
 
+    // CloudTrail: look up recent management-event history.
+    // Correlation of recent events to cost spike windows.
+    "cloudtrail:LookupEvents",
+
     // Workload discovery: enumerate workloads and surface metadata used by
     // Compute Optimizer, recommendations, and tag enrichment.
     "autoscaling:DescribeAutoScalingGroups",
