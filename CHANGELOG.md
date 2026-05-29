@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/infracost/terraform-aws-integration/compare/v0.1.1...v0.1.2) (2026-05-29)
+
+
+### Miscellaneous
+
+* add managed view only access and clean permissions ([#4](https://github.com/infracost/terraform-aws-integration/issues/4)) ([5834454](https://github.com/infracost/terraform-aws-integration/commit/5834454b934dfdbf5ec759a4044500d66a8f96ea))
+
 ## [0.1.1](https://github.com/infracost/terraform-aws-integration/compare/v0.1.0...v0.1.1) (2026-05-28)
 
 
