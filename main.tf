@@ -33,75 +33,46 @@ resource "aws_iam_role" "cross_account_role" {
 }
 
 locals {
+  // ViewOnlyAccess managed policy, attached to every cross account role
+  // below. It already grants the bulk of the read-only resource-discovery
+  // and per-service ListTags/Describe APIs, so the inline actions here are
+  // deliberately limited to what ViewOnlyAccess does NOT cover, plus a few
+  // wildcards that are intentionally broader than ViewOnlyAccess grants.
+  // see: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html
+  view_only_access_policy_arn = "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess"
+
   // Read-only actions every cross-account-link role gets, regardless of
-  // whether it's installed in management or member mode.
+  // whether it's installed in management or member mode. These are NOT
+  // covered by the ViewOnlyAccess managed policy.
   shared_actions = [
     // Tag fetching: fallback ListTags-style APIs for services that
     // tag:GetResources doesn't index reliably, plus the default tag API.
+    // ViewOnlyAccess has no `tag:` service and only a subset of these
+    // per-service tag APIs.
     "acm:ListTagsForCertificate",
     "amplify:ListApps",
     "amplify:ListTagsForResource",
     "apigateway:GET",
     "apprunner:ListServices",
     "apprunner:ListTagsForResource",
-    "backup:ListTags",
-    "bedrock:ListTagsForResource",
-    "cloudfront:ListTagsForResource",
     "ecr:ListTagsForResource",
     "globalaccelerator:ListTagsForResource",
-    "glue:GetTags",
-    "logs:ListTagsForResource",
     "macie2:ListTagsForResource",
     "rds:ListTagsForResource",
-    "route53:ListTagsForResource",
     "s3:GetBucketLocation",
     "s3:GetBucketTagging",
-    "sagemaker:ListTags",
     "savingsplans:ListTagsForResource",
     "scheduler:ListTagsForResource",
-    "sns:ListTagsForResource",
-    "sqs:ListQueueTags",
     "tag:GetResources",
 
-    // CloudTrail: look up recent management-event history.
-    // Correlation of recent events to cost spike windows.
-    "cloudtrail:LookupEvents",
-
-    // Workload discovery: enumerate workloads and surface metadata used by
-    // Compute Optimizer, recommendations, and tag enrichment.
-    "autoscaling:DescribeAutoScalingGroups",
-    "autoscaling:DescribeAutoScalingInstances",
-    "autoscaling:DescribeLaunchConfigurations",
-    "cloudformation:DescribeStacks",
-    "cloudformation:ListStacks",
-    "ec2:DescribeInstances",
+    // Workload discovery not covered by ViewOnlyAccess (no DescribeLaunch*
+    // wildcard).
     "ec2:DescribeLaunchTemplates",
-    "ec2:DescribeVolumes",
-    "ecs:DescribeClusters",
-    "ecs:DescribeServices",
-    "ecs:DescribeTaskDefinition",
-    "ecs:ListClusters",
-    "ecs:ListServices",
-    "ecs:ListTaskDefinitions",
-    "eks:DescribeCluster",
-    "eks:DescribeFargateProfile",
-    "eks:DescribeNodegroup",
-    "eks:ListClusters",
-    "eks:ListFargateProfiles",
-    "eks:ListNodegroups",
-    "iam:ListInstanceProfiles",
-    "iam:ListInstanceProfileTags",
-    "lambda:ListFunctions",
-    "lambda:ListProvisionedConcurrencyConfigs",
-    "lambda:ListTags",
-    "logs:DescribeLogGroups",
-    "rds:DescribeDBClusters",
-    "rds:DescribeDBInstances",
-    "s3:ListAllMyBuckets",
   ]
 
   // Management-only actions: APIs that only function on the AWS
-  // Organization's management account.
+  // Organization's management account. None of the cost/pricing APIs are
+  // part of ViewOnlyAccess, which is resource-view-only.
   management_extra_actions = [
     // BCM Data Exports — discover FOCUS / cost-allocation export configs.
     "bcm-data-exports:Get*",
@@ -116,20 +87,19 @@ locals {
     "ce:List*",
 
     // Recommendations: Compute Optimizer, Cost Optimization Hub,
-    // Trusted Advisor.
+    // Trusted Advisor. The cost-optimization-hub and trustedadvisor
+    // Get*/List* wildcards are intentionally broader than the specific
+    // actions ViewOnlyAccess grants.
     "compute-optimizer:Get*",
     "cost-optimization-hub:Get*",
     "cost-optimization-hub:List*",
-    "trustedadvisor:Describe*",
     "trustedadvisor:Get*",
     "trustedadvisor:List*",
 
-    // Organization metadata: account list, names, tags, trusted-access
-    // services.
+    // Organization metadata: ListAccounts/ListTagsForResource etc. come
+    // from ViewOnlyAccess (organizations:List*); DescribeOrganization does
+    // not.
     "organizations:DescribeOrganization",
-    "organizations:ListAccounts",
-    "organizations:ListAWSServiceAccessForOrganization",
-    "organizations:ListTagsForResource",
 
     // Pricing API.
     "pricing:Describe*",
@@ -142,6 +112,11 @@ locals {
     "s3:GetStorageLensDashboard",
     "s3:ListStorageLensConfigurations",
   ]
+}
+
+resource "aws_iam_role_policy_attachment" "view_only_access_attachment" {
+  policy_arn = local.view_only_access_policy_arn
+  role       = aws_iam_role.cross_account_role.name
 }
 
 resource "aws_iam_policy" "management_account_readonly_policy" {
