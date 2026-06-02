@@ -3,11 +3,6 @@ output "account_id" {
   value       = data.aws_caller_identity.current.account_id
 }
 
-output "account_region" {
-  description = "The AWS region of the account where the module was provisioned."
-  value       = data.aws_region.current.region
-}
-
 output "role_arn" {
   description = "The ARN value of the Cross-Account Role with IAM read-only permissions. Provide this to Infracost."
   value       = aws_iam_role.cross_account_role.arn
