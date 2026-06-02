@@ -5,7 +5,7 @@ output "account_id" {
 
 output "account_region" {
   description = "The AWS region of the account where the module was provisioned."
-  value       = data.aws_region.current.id
+  value       = data.aws_region.current.name
 }
 
 output "role_arn" {
