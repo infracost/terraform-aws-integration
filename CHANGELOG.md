@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/infracost/terraform-aws-integration/compare/v0.1.2...v0.2.0) (2026-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove account_region output and aws_region data source ([#7](https://github.com/infracost/terraform-aws-integration/issues/7))
+
+### Miscellaneous
+
+* remove account_region output and aws_region data source ([#7](https://github.com/infracost/terraform-aws-integration/issues/7)) ([a5dcbe9](https://github.com/infracost/terraform-aws-integration/commit/a5dcbe94a885a64d27891d4f0d2db0342beeaafe))
+
 ## [0.1.2](https://github.com/infracost/terraform-aws-integration/compare/v0.1.1...v0.1.2) (2026-05-29)
 
 
