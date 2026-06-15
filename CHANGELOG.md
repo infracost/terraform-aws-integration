@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/infracost/terraform-aws-integration/compare/v0.2.0...v0.3.0) (2026-06-15)
+
+
+### Features
+
+* add anomaly monitor provisioning submodule ([#9](https://github.com/infracost/terraform-aws-integration/issues/9)) ([2e5fb20](https://github.com/infracost/terraform-aws-integration/commit/2e5fb208b5af312679994f0b13b9534046e5e437))
+
 ## [0.2.0](https://github.com/infracost/terraform-aws-integration/compare/v0.1.2...v0.2.0) (2026-06-03)
 
 
