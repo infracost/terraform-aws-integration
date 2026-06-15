@@ -33,6 +33,12 @@ variable "enable_data_exports" {
   default     = false
 }
 
+variable "enable_anomaly_monitors" {
+  description = "Whether to enable cost anomaly monitor provisioning."
+  type        = bool
+  default     = false
+}
+
 variable "kms_key_arn" {
   description = "ARN of a KMS key to use for server-side encryption of the data export S3 buckets. If null, SSE-S3 (AES-256) is used."
   type        = string

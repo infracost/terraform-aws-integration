@@ -27,3 +27,8 @@ output "s3_storage_lens_bucket_arn" {
   description = "The ARN of the S3 bucket used for S3 Storage Lens exports."
   value       = var.enable_data_exports ? module.s3_storage_lens_export[0].bucket_arn : null
 }
+
+output "cost_anomaly_detection_services_monitor_arn" {
+  description = "The ARN of the Cost Anomaly Detection SERVICES monitor."
+  value       = var.enable_anomaly_monitors ? module.cost_anomaly_detection[0].services_monitor_arn : null
+}
