@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/infracost/terraform-aws-integration/compare/v0.3.0...v0.3.1) (2026-06-26)
+
+
+### Bug Fixes
+
+* grant Transit Gateway and Client VPN describe for idle checks ([#11](https://github.com/infracost/terraform-aws-integration/issues/11)) ([b94e441](https://github.com/infracost/terraform-aws-integration/commit/b94e441fc76adcd835b1985140629520d04013f3))
+
 ## [0.3.0](https://github.com/infracost/terraform-aws-integration/compare/v0.2.0...v0.3.0) (2026-06-15)
 
 
