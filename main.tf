@@ -67,6 +67,10 @@ locals {
     // Workload discovery not covered by ViewOnlyAccess (no DescribeLaunch*
     // wildcard).
     "ec2:DescribeLaunchTemplates",
+
+    // ViewOnlyAccess enumerates EC2 describes individually; these two aren't in it.
+    "ec2:DescribeClientVpnEndpoints",
+    "ec2:DescribeTransitGatewayAttachments",
   ]
 
   // Management-only actions: APIs that only function on the AWS
