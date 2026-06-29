@@ -8,7 +8,13 @@ terraform {
 }
 
 data "aws_caller_identity" "current" {}
-data "aws_organizations_organization" "current" {}
+
+# Only read organization metadata when data exports are enabled (management
+# account only). Gating this avoids requiring organizations:DescribeOrganization
+# on member-account installs.
+data "aws_organizations_organization" "current" {
+  count = var.enable_data_exports ? 1 : 0
+}
 
 locals {
   common_tags = {
