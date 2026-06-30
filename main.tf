@@ -8,7 +8,16 @@ terraform {
 }
 
 data "aws_caller_identity" "current" {}
-data "aws_organizations_organization" "current" {}
+
+# Only read organization metadata when data exports are enabled on a
+# management account — the only path that consumes the result. Gating on
+# both flags avoids requiring organizations:DescribeOrganization on
+# member-account installs, and ensures a misconfigured member-account caller
+# (enable_data_exports = true, is_management_account = false) hits the
+# friendly precondition in exports.tf instead of an Organizations API error.
+data "aws_organizations_organization" "current" {
+  count = var.is_management_account && var.enable_data_exports ? 1 : 0
+}
 
 locals {
   common_tags = {
