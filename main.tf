@@ -90,9 +90,6 @@ locals {
     "bcm-data-exports:Get*",
     "bcm-data-exports:List*",
 
-    // Pricing calculator scenarios.
-    "bcm-pricing-calculator:*",
-
     // Cost Explorer.
     "ce:Describe*",
     "ce:Get*",
