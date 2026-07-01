@@ -85,13 +85,10 @@ locals {
   // Management-only actions: APIs that only function on the AWS
   // Organization's management account. None of the cost/pricing APIs are
   // part of ViewOnlyAccess, which is resource-view-only.
-  management_extra_actions = [
+  management_extra_actions = concat([
     // BCM Data Exports — discover FOCUS / cost-allocation export configs.
     "bcm-data-exports:Get*",
     "bcm-data-exports:List*",
-
-    // Pricing calculator scenarios.
-    "bcm-pricing-calculator:*",
 
     // Cost Explorer.
     "ce:Describe*",
@@ -123,7 +120,10 @@ locals {
     "s3:GetStorageLensConfigurationTagging",
     "s3:GetStorageLensDashboard",
     "s3:ListStorageLensConfigurations",
-  ]
+    ],
+    // Pricing calculator scenarios — opt-in since it's a broad wildcard.
+    var.enable_pricing_calculator ? ["bcm-pricing-calculator:*"] : []
+  )
 }
 
 resource "aws_iam_role_policy_attachment" "view_only_access_attachment" {
