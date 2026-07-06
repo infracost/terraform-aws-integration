@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/infracost/terraform-aws-integration/compare/v0.3.1...v0.3.2) (2026-07-06)
+
+
+### Bug Fixes
+
+* gate aws_organizations_organization data source on enable_data_exports ([#13](https://github.com/infracost/terraform-aws-integration/issues/13)) ([9953e8b](https://github.com/infracost/terraform-aws-integration/commit/9953e8b17f2d4794ecc598801e4b754de8d7aa37))
+* remove bcm-pricing-calculator:* iam permission ([#16](https://github.com/infracost/terraform-aws-integration/issues/16)) ([8000903](https://github.com/infracost/terraform-aws-integration/commit/8000903a707359ee684d6001e0f0adc38e1a02d3))
+
 ## [0.3.1](https://github.com/infracost/terraform-aws-integration/compare/v0.3.0...v0.3.1) (2026-06-26)
 
 
