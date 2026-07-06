@@ -73,6 +73,10 @@ locals {
     "scheduler:ListTagsForResource",
     "tag:GetResources",
 
+    // Resource config for IaC attribution: memory/storage of Lambda functions.
+    // ViewOnlyAccess grants only lambda:List*, not GetFunctionConfiguration.
+    "lambda:GetFunctionConfiguration",
+
     // Workload discovery not covered by ViewOnlyAccess (no DescribeLaunch*
     // wildcard).
     "ec2:DescribeLaunchTemplates",
