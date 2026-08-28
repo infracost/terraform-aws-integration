@@ -39,6 +39,23 @@ variable "enable_anomaly_monitors" {
   default     = false
 }
 
+variable "enable_bedrock_invoke" {
+  description = "Whether to create a separate infracost-bedrock role for invoking Amazon Bedrock models in this account. This lets Infracost's AI agents use your Bedrock account, so you pay for usage and prompts stay in your account. You must also enable the models in the Bedrock console."
+  type        = bool
+  default     = false
+}
+
+variable "bedrock_model_vendors" {
+  description = "Model vendors the infracost-bedrock role can use. Choose the model in Infracost without changing this setting."
+  type        = list(string)
+  default     = ["anthropic"]
+
+  validation {
+    condition     = alltrue([for v in var.bedrock_model_vendors : contains(["anthropic"], v)])
+    error_message = "Supported vendors: anthropic."
+  }
+}
+
 variable "kms_key_arn" {
   description = "ARN of a KMS key to use for server-side encryption of the data export S3 buckets. If null, SSE-S3 (AES-256) is used."
   type        = string

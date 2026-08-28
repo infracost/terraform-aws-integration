@@ -23,11 +23,9 @@ locals {
   common_tags = {
     InfracostModuleVersion = local.module_version
   }
-}
 
-resource "aws_iam_role" "cross_account_role" {
-  name = "infracost-readonly${var.role_suffix}"
-  assume_role_policy = jsonencode({
+  // Used by every role this module creates to keep them consistent.
+  infracost_trust_policy = jsonencode({
     Version : "2012-10-17",
     Statement = [
       {
@@ -36,6 +34,11 @@ resource "aws_iam_role" "cross_account_role" {
       }
     ]
   })
+}
+
+resource "aws_iam_role" "cross_account_role" {
+  name               = "infracost-readonly${var.role_suffix}"
+  assume_role_policy = local.infracost_trust_policy
 
   tags = local.common_tags
 }
