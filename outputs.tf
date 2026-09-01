@@ -8,6 +8,11 @@ output "role_arn" {
   value       = aws_iam_role.cross_account_role.arn
 }
 
+output "bedrock_role_arn" {
+  description = "ARN of the Bedrock invoke role. Give this to Infracost when using your own Bedrock account."
+  value       = var.enable_bedrock_invoke ? aws_iam_role.bedrock_role[0].arn : null
+}
+
 output "billing_and_cost_management_export_arn" {
   description = "The ARN of the BCM Data Exports export."
   value       = var.enable_data_exports ? module.billing_and_cost_management_export[0].export_arn : null
