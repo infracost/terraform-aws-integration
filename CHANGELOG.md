@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/infracost/terraform-aws-integration/compare/v0.3.2...v0.4.0) (2026-09-01)
+
+
+### Features
+
+* add optional infracost-bedrock role for invoking Claude models ([#18](https://github.com/infracost/terraform-aws-integration/issues/18)) ([5eaf19e](https://github.com/infracost/terraform-aws-integration/commit/5eaf19eaebefbaa3b3beeecb8882aad5050d9fa2))
+
 ## [0.3.2](https://github.com/infracost/terraform-aws-integration/compare/v0.3.1...v0.3.2) (2026-07-06)
 
 
