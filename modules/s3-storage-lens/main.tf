@@ -17,12 +17,18 @@ resource "aws_s3control_storage_lens_configuration" "export" {
     enabled = true
 
     account_level {
-      activity_metrics {
-        enabled = true
+      dynamic "activity_metrics" {
+        for_each = var.enable_advanced_metrics ? [1] : []
+        content {
+          enabled = true
+        }
       }
 
-      advanced_cost_optimization_metrics {
-        enabled = true
+      dynamic "advanced_cost_optimization_metrics" {
+        for_each = var.enable_advanced_metrics ? [1] : []
+        content {
+          enabled = true
+        }
       }
 
       # https://github.com/hashicorp/terraform-provider-aws/issues/46851
@@ -31,12 +37,18 @@ resource "aws_s3control_storage_lens_configuration" "export" {
       # }
 
       bucket_level {
-        activity_metrics {
-          enabled = true
+        dynamic "activity_metrics" {
+          for_each = var.enable_advanced_metrics ? [1] : []
+          content {
+            enabled = true
+          }
         }
 
-        advanced_cost_optimization_metrics {
-          enabled = true
+        dynamic "advanced_cost_optimization_metrics" {
+          for_each = var.enable_advanced_metrics ? [1] : []
+          content {
+            enabled = true
+          }
         }
 
         # https://github.com/hashicorp/terraform-provider-aws/issues/46851
