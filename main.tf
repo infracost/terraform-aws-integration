@@ -76,6 +76,10 @@ locals {
     "scheduler:ListTagsForResource",
     "tag:GetResources",
 
+    // Bedrock model catalog discovery. ListFoundationModels does not support
+    // resource-level permissions.
+    "bedrock:ListFoundationModels",
+
     // Workload discovery not covered by ViewOnlyAccess (no DescribeLaunch*
     // wildcard).
     "ec2:DescribeLaunchTemplates",
