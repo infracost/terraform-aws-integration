@@ -61,3 +61,9 @@ variable "kms_key_arn" {
   type        = string
   default     = null
 }
+
+variable "enable_advanced_metrics" {
+  description = "Enable S3 Storage Lens advanced-tier metrics (activity_metrics and advanced_cost_optimization_metrics). Both are advanced-tier features billed per million objects monitored org-wide; set to false to stay on the free metrics tier. Only has effect when enable_data_exports = true."
+  type        = bool
+  default     = true
+}

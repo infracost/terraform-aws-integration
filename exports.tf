@@ -31,4 +31,6 @@ module "s3_storage_lens_export" {
   aws_trusted_principals = data.aws_organizations_organization.current[0].aws_service_access_principals
   kms_key_arn            = var.kms_key_arn
   tags                   = local.common_tags
+
+  enable_advanced_metrics = var.enable_advanced_metrics
 }
