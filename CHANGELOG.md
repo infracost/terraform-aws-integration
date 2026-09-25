@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/infracost/terraform-aws-integration/compare/v0.4.0...v0.5.0) (2026-09-25)
+
+
+### Features
+
+* **s3-storage-lens:** add enable_advanced_metrics variable ([#20](https://github.com/infracost/terraform-aws-integration/issues/20)) ([98e4bb2](https://github.com/infracost/terraform-aws-integration/commit/98e4bb247bcbbac99d33a7c44606b5a64cc5e604))
+
 ## [0.4.0](https://github.com/infracost/terraform-aws-integration/compare/v0.3.2...v0.4.0) (2026-09-01)
 
 
