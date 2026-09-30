@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/infracost/terraform-aws-integration/compare/v0.5.0...v0.5.1) (2026-09-30)
+
+
+### Miscellaneous
+
+* pin GitHub Actions to SHAs (FIX-831) ([#22](https://github.com/infracost/terraform-aws-integration/issues/22)) ([af11985](https://github.com/infracost/terraform-aws-integration/commit/af11985cf886d3f7d4d6cd03b0e034150bb7c512))
+
 ## [0.5.0](https://github.com/infracost/terraform-aws-integration/compare/v0.4.0...v0.5.0) (2026-09-25)
 
 
