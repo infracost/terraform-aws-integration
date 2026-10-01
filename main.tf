@@ -46,15 +46,15 @@ resource "aws_iam_role" "cross_account_role" {
 locals {
   // ViewOnlyAccess managed policy, attached to every cross account role
   // below. It already grants the bulk of the read-only resource-discovery
-  // and per-service ListTags/Describe APIs, so the inline actions here are
-  // deliberately limited to what ViewOnlyAccess does NOT cover, plus a few
-  // wildcards that are intentionally broader than ViewOnlyAccess grants.
+  // and per-service ListTags/Describe APIs. The inline actions supplement
+  // it with required metadata reads and intentionally broader wildcards.
   // see: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html
   view_only_access_policy_arn = "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess"
 
   // Read-only actions every cross-account-link role gets, regardless of
-  // whether it's installed in management or member mode. These are NOT
-  // covered by the ViewOnlyAccess managed policy.
+  // whether it's installed in management or member mode. Required S3
+  // configuration reads are explicit rather than relying on managed-policy
+  // contents.
   shared_actions = [
     // Tag fetching: fallback ListTags-style APIs for services that
     // tag:GetResources doesn't index reliably, plus the default tag API.
@@ -75,6 +75,13 @@ locals {
     "savingsplans:ListTagsForResource",
     "scheduler:ListTagsForResource",
     "tag:GetResources",
+
+    // S3 lifecycle investigations: read bucket configuration without
+    // granting object-content reads or write access.
+    "s3:GetBucketObjectLockConfiguration",
+    "s3:GetBucketVersioning",
+    "s3:GetLifecycleConfiguration",
+    "s3:GetReplicationConfiguration",
 
     // Workload discovery not covered by ViewOnlyAccess (no DescribeLaunch*
     // wildcard).
