@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.6.0](https://github.com/infracost/terraform-aws-integration/compare/v0.5.0...v0.6.0) (2026-10-09)
+
+
+### Features
+
+* grant S3 agent configuration reads ([#25](https://github.com/infracost/terraform-aws-integration/issues/25)) ([bdff0e1](https://github.com/infracost/terraform-aws-integration/commit/bdff0e16a048b2e6be7ab6ab828f0e1d1b1657f6))
+
+
+### Bug Fixes
+
+* grant Bedrock catalog access to integration roles ([#24](https://github.com/infracost/terraform-aws-integration/issues/24)) ([f168fb4](https://github.com/infracost/terraform-aws-integration/commit/f168fb450b695997ac2075013b7d8f9d8801cc3c))
+
+
+### Miscellaneous
+
+* pin GitHub Actions to SHAs (FIX-831) ([#22](https://github.com/infracost/terraform-aws-integration/issues/22)) ([af11985](https://github.com/infracost/terraform-aws-integration/commit/af11985cf886d3f7d4d6cd03b0e034150bb7c512))
+
 ## [0.5.0](https://github.com/infracost/terraform-aws-integration/compare/v0.4.0...v0.5.0) (2026-09-25)
 
 
