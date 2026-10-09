@@ -80,6 +80,13 @@ locals {
     // resource-level permissions.
     "bedrock:ListFoundationModels",
 
+    // S3 lifecycle investigations: read bucket configuration without
+    // granting object-content reads or write access.
+    "s3:GetBucketObjectLockConfiguration",
+    "s3:GetBucketVersioning",
+    "s3:GetLifecycleConfiguration",
+    "s3:GetReplicationConfiguration",
+
     // Workload discovery not covered by ViewOnlyAccess (no DescribeLaunch*
     // wildcard).
     "ec2:DescribeLaunchTemplates",
