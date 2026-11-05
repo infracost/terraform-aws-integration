@@ -84,6 +84,11 @@ locals {
     "bedrock:ListInferenceProfiles",
     "bedrock:ListTagsForResource",
 
+    // Bedrock Mantle model and project metadata; no model invocation.
+    "bedrock-mantle:GetModel",
+    "bedrock-mantle:GetProject",
+    "bedrock-mantle:ListModels",
+
     // S3 lifecycle investigations: read bucket configuration without
     // granting object-content reads or write access.
     "s3:GetBucketObjectLockConfiguration",
