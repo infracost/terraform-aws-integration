@@ -76,11 +76,13 @@ locals {
     "scheduler:ListTagsForResource",
     "tag:GetResources",
 
-    // Bedrock lifecycle metadata: resolve application inference profiles in
-    // their owning account and discover the regional model catalog.
-    // ListFoundationModels does not support resource-level permissions.
+    // Bedrock inventory and lifecycle metadata: discover application profiles,
+    // read their models and tags, and discover the regional model catalog.
+    // ListFoundationModels and ListInferenceProfiles require Resource "*".
     "bedrock:GetInferenceProfile",
     "bedrock:ListFoundationModels",
+    "bedrock:ListInferenceProfiles",
+    "bedrock:ListTagsForResource",
 
     // S3 lifecycle investigations: read bucket configuration without
     // granting object-content reads or write access.
