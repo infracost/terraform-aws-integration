@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/infracost/terraform-aws-integration/compare/v0.6.0...v0.7.0) (2026-11-11)
+
+
+### Features
+
+* grant Bedrock profile metadata access - TRK-1437 ([#26](https://github.com/infracost/terraform-aws-integration/issues/26)) ([ed5a94a](https://github.com/infracost/terraform-aws-integration/commit/ed5a94af80e1318a385a9eb179afef036884ea0e))
+
 ## [0.6.0](https://github.com/infracost/terraform-aws-integration/compare/v0.5.0...v0.6.0) (2026-10-09)
 
 
