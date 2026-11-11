@@ -76,9 +76,18 @@ locals {
     "scheduler:ListTagsForResource",
     "tag:GetResources",
 
-    // Bedrock model catalog discovery. ListFoundationModels does not support
-    // resource-level permissions.
+    // Bedrock inventory and lifecycle metadata: discover application profiles,
+    // read their models and tags, and discover the regional model catalog.
+    // ListFoundationModels and ListInferenceProfiles require Resource "*".
+    "bedrock:GetInferenceProfile",
     "bedrock:ListFoundationModels",
+    "bedrock:ListInferenceProfiles",
+    "bedrock:ListTagsForResource",
+
+    // Bedrock Mantle model and project metadata; no model invocation.
+    "bedrock-mantle:GetModel",
+    "bedrock-mantle:GetProject",
+    "bedrock-mantle:ListModels",
 
     // S3 lifecycle investigations: read bucket configuration without
     // granting object-content reads or write access.
